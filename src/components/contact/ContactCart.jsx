@@ -34,7 +34,7 @@ export default function ContactCart({ contact }) {
         </Button>
       </article>
       {open && (
-        <div className=" w-full h-screen fixed top-0 left-0 right-0 bg-[#333333c0] grid place-items-center">
+        <div className=" w-full h-screen fixed top-0 left-0 right-0 bg-[#333333c0] grid place-items-center z-20">
           <div className=" bg-white rounded-md p-5">
             <h2>Are you sure to delete ?</h2>
             <div className="flex items-center gap-3 mt-3">
