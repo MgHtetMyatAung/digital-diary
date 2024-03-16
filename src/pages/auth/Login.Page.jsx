@@ -4,6 +4,7 @@ import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
 import styled from "./auth.module.css";
 import { twMerge } from "tailwind-merge";
+import { ChevronLeft } from "lucide-react";
 
 export default function LoginPage() {
   const { useLoginMutation } = apiHooks;
@@ -71,6 +72,9 @@ export default function LoginPage() {
               <p className=" text-red-500 opacity-0">hide text</p>
             )}
           </form>
+          <Link to={"/"} className=" flex items-center gap-3">
+            <ChevronLeft /> Home Page
+          </Link>
         </div>
       </main>
     </section>

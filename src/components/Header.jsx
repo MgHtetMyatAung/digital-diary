@@ -9,16 +9,18 @@ export default function Header() {
     <main className=" shadow-sm">
       <nav className=" container mx-auto flex justify-between items-center h-[70px]">
         <Link to={"/"}>
-          <h1 className=" text-xl font-semibold">FM</h1>
+          <h1 className=" text-2xl font-semibold text-gray-800">3R</h1>
         </Link>
-        <ul className=" flex items-center gap-5">
-          <li>
-            <NavLink to={"/posts"}>Posts</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/contacts"}>Contacts</NavLink>
-          </li>
-        </ul>
+        {currentUser && (
+          <ul className=" flex items-center gap-5">
+            <li>
+              <NavLink to={"/posts"}>Posts</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/contacts"}>Contacts</NavLink>
+            </li>
+          </ul>
+        )}
         <div className=" flex items-center gap-5">
           {currentUser ? (
             <Link to={"/profile"}>

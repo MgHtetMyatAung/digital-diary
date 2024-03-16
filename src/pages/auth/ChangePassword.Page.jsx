@@ -7,6 +7,7 @@ import { apiHooks } from "../../redux/createApis";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeAuth } from "../../redux/authSlice";
+import { ChevronLeft } from "lucide-react";
 
 export default function ChangePasswordPage() {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export default function ChangePasswordPage() {
               </Link>
             </div>
           </div>
-          <form action="" onSubmit={handleSubmit} className=" space-y-5 mt-3">
+          <form action="" onSubmit={handleSubmit} className=" space-y-5 my-3">
             <div className="">
               <Input
                 type="password"
@@ -88,6 +89,9 @@ export default function ChangePasswordPage() {
               <p className=" text-red-500 opacity-0">hide text</p>
             )}
           </form>
+          <Link to={"/"} className=" flex items-center gap-3">
+            <ChevronLeft /> Home Page
+          </Link>
         </div>
       </main>
     </section>

@@ -26,6 +26,7 @@ export default function ContactCart({ contact }) {
         <p className=" text-gray-600">{contact?.phone}</p>
         <Button
           variant="outlined"
+          color="red"
           className=" mt-3"
           onClick={() => setOpen(true)}
         >

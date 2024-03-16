@@ -40,7 +40,13 @@ export default function ContactPage() {
               >
                 <ChevronLeft />
               </Button>
-              <Button onClick={() => setPage(page + 1)}>
+              <Button
+                onClick={() =>
+                  setPage((num) =>
+                    num < data?.contacts?.last_page ? num + 1 : num
+                  )
+                }
+              >
                 <ChevronRight />
               </Button>
             </div>
