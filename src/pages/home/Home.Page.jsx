@@ -26,7 +26,7 @@ export default function HomePage() {
               You can download and customize yourself{" "}
             </p>
             <Link
-              to={"/"}
+              to={"/docs"}
               className=" text-blue-600 font-semibold flex items-center gap-2"
             >
               <StickyNote size={18} />

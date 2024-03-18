@@ -8,3 +8,4 @@ export { default as PostsPage } from "./post/Posts.Page";
 export { default as PostDetailPage } from "./post/PostDetail.Page";
 export { default as ProfilePage } from "./profile/Profile.Page";
 export { default as ChangePasswordPage } from "./auth/ChangePassword.Page";
+export { default as DocsPage } from "./docs/Docs.Page";

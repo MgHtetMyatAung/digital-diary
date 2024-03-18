@@ -3,6 +3,7 @@ import {
   ContactDetailPage,
   ContactMutatePage,
   ContactPage,
+  DocsPage,
   HomePage,
   LoginPage,
   PostDetailPage,
@@ -99,5 +100,14 @@ export const routes = [
       </LayoutProvider>
     ),
     access: "user",
+  },
+  {
+    path: "/docs",
+    element: (
+      <LayoutProvider>
+        <DocsPage />
+      </LayoutProvider>
+    ),
+    access: "any",
   },
 ];
