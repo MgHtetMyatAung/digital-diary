@@ -18,7 +18,7 @@ export default function HomePage() {
               Get Template
             </Link>
           </div>
-          <h1 className=" text-3xl md:text-4xl lg:text-6xl font-bold text-gray-600 leading-relaxed lg:leading-snug">
+          <h1 className=" text-3xl md:text-4xl lg:text-6xl font-bold text-gray-700 leading-relaxed lg:leading-snug">
             React , Redux Toolkit & RTK Query Template
           </h1>
           <div className=" pt-3 md:pt-5">
