@@ -9,11 +9,6 @@ export const authSlice = createSlice({
       state.user = null;
       state.expires_at = null;
     },
-    setAuth: (state, payload) => {
-      state.token = payload.token;
-      state.user = payload.user;
-      state.expires_at = payload.expires_at;
-    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -27,5 +22,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { removeAuth, setAuth } = authSlice.actions;
+export const { removeAuth } = authSlice.actions;
 export default authSlice.reducer;
