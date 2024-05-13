@@ -12,7 +12,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      apiServices.contactApi.endpoints.login.matchFulfilled,
+      apiServices.diaryApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
         state.token = payload.token;
         state.user = payload.user;

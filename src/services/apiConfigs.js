@@ -1,116 +1,144 @@
 // Define an array of API configurations
 export const apiConfigs = [
   {
-    name: "contactApi",
-    baseUrl: import.meta.env.VITE_APP_CONTACT_URL,
+    name: "diaryApi",
+    baseUrl: `${import.meta.env.VITE_APP_MEMO_URL}`,
     auth: true,
-    tagTypes: ["Contact", "Auth"],
+    tagTypes: ["memo", "todo", "poem", "Auth"],
     endpoints: (builder) => ({
+      // for auth api
       register: builder.mutation({
         query: (credentials) => ({
-          url: "register",
+          url: "auth/signup",
           method: "POST",
           body: credentials,
         }),
       }),
       login: builder.mutation({
         query: (credentials) => ({
-          url: "login",
+          url: "auth/login",
           method: "POST",
           body: credentials,
         }),
         invalidatesTags: ["Auth"],
       }),
-      changePassword: builder.mutation({
-        query: (credentials) => ({
-          url: "change-password",
-          method: "POST",
-          body: credentials,
-        }),
-      }),
-      logout: builder.mutation({
-        query: () => ({
-          url: "user-logout",
-          method: "POST",
-        }),
-      }),
-      getContacts: builder.query({
-        query: (page = 1) => ({
-          url: `contact?page=${page}`,
+
+      // for memo api
+      getMemos: builder.query({
+        query: ({ page = 1, per_page = 10, search }) => ({
+          url: `memo?page=${page}&per_page=${per_page}&search=${search}`,
           method: "GET",
         }),
-        providesTags: ["Contact", "Auth"],
+        providesTags: ["memo", "Auth"],
       }),
-      getContactDetail: builder.query({
-        query: (contactId) => ({
-          url: `contact/${contactId}`,
+      getMemoDetail: builder.query({
+        query: (memoId) => ({
+          url: `memo/${memoId}`,
           method: "GET",
         }),
-        providesTags: ["Contact"],
+        providesTags: ["memo"],
       }),
-      deleteContact: builder.mutation({
-        query: (contactId) => ({
-          url: `contact/${contactId}`,
+      deleteMemo: builder.mutation({
+        query: (memoId) => ({
+          url: `memo/${memoId}`,
           method: "DELETE",
         }),
-        invalidatesTags: ["Contact"],
+        invalidatesTags: ["memo"],
       }),
-      createContact: builder.mutation({
+      createMemo: builder.mutation({
         query: (credentials) => ({
-          url: `contact`,
+          url: `memo`,
           method: "POST",
           body: credentials,
         }),
-        invalidatesTags: ["Contact"],
+        invalidatesTags: ["memo"],
       }),
-      updateContact: builder.mutation({
+      updateMemo: builder.mutation({
         query: ({ data, id }) => ({
-          url: `contact/${id}`,
-          method: "PUT",
+          url: `memo/${id}`,
+          method: "PATCH",
           body: data,
         }),
-        invalidatesTags: ["Contact"],
+        invalidatesTags: ["memo"],
       }),
-      getProfile: builder.query({
-        query: () => ({
-          url: "user-profile",
+
+      // for todo api
+      getTodoLists: builder.query({
+        query: ({ page = 1, per_page = 10, search }) => ({
+          url: `todo?page=${page}&per_page=${per_page}&search=${search}`,
           method: "GET",
         }),
-        providesTags: ["Auth"],
+        providesTags: ["todo", "Auth"],
       }),
-    }),
-  },
-  {
-    name: "productApi",
-    baseUrl: "https://your-product-api.com/api/",
-    auth: false,
-    tagTypes: ["Product"],
-    endpoints: (builder) => ({
-      getProductById: builder.query({
-        query: (id) => `product/${id}`,
-      }),
-      // Add more product endpoints here as needed
-    }),
-  },
-  {
-    name: "postApi",
-    baseUrl: import.meta.env.VITE_APP_POST_URL,
-    auth: false,
-    tagTypes: ["Post"],
-    endpoints: (builder) => ({
-      getAllPosts: builder.query({
-        query: () => ({
-          url: "posts",
+      getTodoDetail: builder.query({
+        query: (todoId) => ({
+          url: `todo/${todoId}`,
           method: "GET",
         }),
+        providesTags: ["todo"],
       }),
-      getDetailPost: builder.query({
-        query: (postId) => ({
-          url: `posts/${postId}`,
+      deleteTodo: builder.mutation({
+        query: (todoId) => ({
+          url: `todo/${todoId}`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["todo"],
+      }),
+      createTodo: builder.mutation({
+        query: (credentials) => ({
+          url: `todo`,
+          method: "POST",
+          body: credentials,
+        }),
+        invalidatesTags: ["todo"],
+      }),
+      updateTodo: builder.mutation({
+        query: ({ data, id }) => ({
+          url: `todo/${id}`,
+          method: "PATCH",
+          body: data,
+        }),
+        invalidatesTags: ["todo"],
+      }),
+
+      // for poem api
+      getPoems: builder.query({
+        query: ({ page = 1, per_page = 10, search }) => ({
+          url: `poem?page=${page}&per_page=${per_page}&search=${search}`,
           method: "GET",
         }),
+        providesTags: ["poem", "Auth"],
       }),
-      // Add more post endpoints here as needed
+      getPoemDetail: builder.query({
+        query: (poemId) => ({
+          url: `poem/${poemId}`,
+          method: "GET",
+        }),
+        providesTags: ["poem"],
+      }),
+      deletePoem: builder.mutation({
+        query: (poemId) => ({
+          url: `poem/${poemId}`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["poem"],
+      }),
+      createPoem: builder.mutation({
+        query: (credentials) => ({
+          url: `poem`,
+          method: "POST",
+          body: credentials,
+        }),
+        invalidatesTags: ["poem"],
+      }),
+      updatePoem: builder.mutation({
+        query: ({ data, id }) => ({
+          url: `poem/${id}`,
+          method: "PATCH",
+          body: data,
+        }),
+        invalidatesTags: ["poem"],
+      }),
     }),
   },
   // Add more API configurations here as needed
