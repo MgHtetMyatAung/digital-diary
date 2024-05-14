@@ -1,4 +1,4 @@
-import { Header } from "../components";
+import { Footer, Header } from "../components";
 
 // eslint-disable-next-line react/prop-types
 export default function LayoutProvider({ children }) {
@@ -6,6 +6,7 @@ export default function LayoutProvider({ children }) {
     <>
       <Header />
       {children}
+      {/* <Footer /> */}
     </>
   );
 }

@@ -14,8 +14,8 @@ export const authSlice = createSlice({
     builder.addMatcher(
       apiServices.diaryApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload.token;
-        state.user = payload.user;
+        state.token = payload.access_token;
+        state.user = payload.data;
         state.expires_at = payload.expires_at || 30;
       }
     );
