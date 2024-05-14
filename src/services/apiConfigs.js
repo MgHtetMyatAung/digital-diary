@@ -25,8 +25,8 @@ export const apiConfigs = [
 
       // for memo api
       getMemos: builder.query({
-        query: ({ page = 1, per_page = 10, search }) => ({
-          url: `memo?page=${page}&per_page=${per_page}&search=${search}`,
+        query: ({ page, perPage, search }) => ({
+          url: `memo?page=${page}&per_page=${perPage}&search=${search}`,
           method: "GET",
         }),
         providesTags: ["memo", "Auth"],

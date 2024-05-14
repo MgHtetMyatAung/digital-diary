@@ -11,14 +11,23 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      apiServices.diaryApi.endpoints.login.matchFulfilled,
-      (state, { payload }) => {
-        state.token = payload.access_token;
-        state.user = payload.data;
-        state.expires_at = payload.expires_at || 30;
-      }
-    );
+    builder
+      .addMatcher(
+        apiServices.diaryApi.endpoints.login.matchFulfilled,
+        (state, { payload }) => {
+          state.token = payload.access_token;
+          state.user = payload.data;
+          state.expires_at = payload.expires_at || 30;
+        }
+      )
+      .addMatcher(
+        apiServices.diaryApi.endpoints.register.matchFulfilled,
+        (state, { payload }) => {
+          state.token = payload.access_token;
+          state.user = payload.data;
+          state.expires_at = payload.expires_at || 30;
+        }
+      );
   },
 });
 
