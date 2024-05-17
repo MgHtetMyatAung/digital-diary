@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { apiHooks } from "../../redux/createApis";
-import { EmptyData, Loading, MemoCard, SearchForm } from "../../components";
-import { Button } from "@material-tailwind/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  CreateMemoBtn,
+  EmptyData,
+  Loading,
+  MemoCard,
+  Pagination,
+  SearchForm,
+} from "../../components";
 
 export default function MemoPage() {
   const [page, setPage] = useState(1);
@@ -13,31 +18,30 @@ export default function MemoPage() {
 
   return (
     <main className=" min-h-[100vh] pt-[70px]">
-      <div className=" container mx-auto my-5">
+      <div className=" container mx-auto my-5 space-y-2">
         <SearchForm setValue={setSearch} />
+        <CreateMemoBtn />
       </div>
       {isFetching ? (
         <Loading />
       ) : (
-        <section className=" container mx-auto min-h-[calc(100vh-70px)]">
+        <section className=" container mx-auto min-h-[calc(100vh-200px)]">
           <>
             {data?.items?.length > 0 ? (
               <div className="">
-                <div className=" min-h-[70vh]">
+                <div className=" min-h-[60vh]">
                   <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
                     {data?.items?.map((memo) => (
                       <MemoCard key={memo.id} memo={memo} />
                     ))}
                   </div>
                 </div>
-                <div className=" space-x-3">
-                  <Button size="sm">
-                    <ChevronLeft color="white" />
-                  </Button>
-                  <Button size="sm">
-                    <ChevronRight color="white" />
-                  </Button>
-                </div>
+                <Pagination
+                  next={data?.nextPage}
+                  prev={data?.prevPage}
+                  curPage={data?.curPage}
+                  setPage={setPage}
+                />
               </div>
             ) : (
               <EmptyData />

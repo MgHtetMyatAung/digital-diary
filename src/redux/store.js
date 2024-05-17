@@ -13,7 +13,9 @@ import {
   REGISTER,
 } from "redux-persist";
 import authReducer from "./authSlice";
+import errorReducer from "./errorSlice";
 import { persistConfig } from "./persist";
+import { addErrorInfo, removeErrorInfo } from "./errorSlice";
 
 // Import your post API service object
 
@@ -22,7 +24,7 @@ const services = apiServices;
 console.log(services, "services");
 
 // Initialize an empty object to store reducers
-const reducers = { auth: authReducer };
+const reducers = { auth: authReducer, error: errorReducer };
 const middlewares = [];
 
 // Loop through each API service object and add its reducer to the reducers object
@@ -38,6 +40,33 @@ const rootReducers = combineReducers(reducers);
 // Create the persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 
+// error handle
+const rtkQueryErrorLogger = () => (next) => (action) => {
+  if (action.type.endsWith("rejected")) {
+    // console.log(action); // Log the rejected action
+    if (action.payload?.status === 401) {
+      // console.log(action.payload?.data?.message);
+      next(
+        addErrorInfo({
+          code: action.payload?.status,
+          message: action.payload?.data?.message,
+        })
+      );
+    }
+  } else if (action.type.endsWith("fulfilled")) {
+    // console.log(action); // Log the fulfilled action
+    next(removeErrorInfo());
+    // next(
+    //   addErrorInfo({
+    //     code: 401,
+    //     message: "token expired",
+    //   })
+    // );
+  }
+
+  return next(action);
+};
+
 // Create a Redux store with preconfigured functionality
 export const store = configureStore({
   reducer: persistedReducer,
@@ -48,7 +77,10 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(middlewares.map((api) => api.middleware)), // Add middleware for handling API requests
+    }).concat(
+      middlewares.map((api) => api.middleware),
+      rtkQueryErrorLogger
+    ), // Add middleware for handling API requests
 });
 
 // Optional: Set up listeners for RTK Query

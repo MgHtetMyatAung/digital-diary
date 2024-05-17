@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 import AuthenticationProvider from "../provider/Auth.Provider";
+import GlobalErrorProvider from "../provider/GlobalError.Provider";
 export default function Router() {
   return (
     <Routes>
@@ -10,7 +11,9 @@ export default function Router() {
             path={path}
             element={
               access === "user" ? (
-                <AuthenticationProvider>{element}</AuthenticationProvider>
+                <GlobalErrorProvider>
+                  <AuthenticationProvider>{element}</AuthenticationProvider>
+                </GlobalErrorProvider>
               ) : (
                 element
               )
