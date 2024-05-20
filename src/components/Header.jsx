@@ -70,7 +70,7 @@ function MbMenu() {
       <Menu size={28} onClick={menuToggle} />
       <div
         className={cns(
-          "h-screen fixed bottom-0 w-full bg-gray-100 transition-all duration-300",
+          "h-[150vh] fixed bottom-0 w-full bg-gray-100 transition-all duration-300",
           {
             "right-0": menuOpen,
             "right-[-100%]": !menuOpen,
