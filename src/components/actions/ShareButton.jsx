@@ -1,4 +1,5 @@
 import { Button } from "@material-tailwind/react";
+import { Share2 } from "lucide-react";
 
 export default function ShareButton({ itemId }) {
   const shareUrl = window.location.href + `/${itemId}`;
@@ -25,7 +26,12 @@ export default function ShareButton({ itemId }) {
     }
   };
   return (
-    <Button size="sm" onClick={handleShareClick}>
+    <Button
+      size="sm"
+      onClick={handleShareClick}
+      className=" flex items-center gap-2"
+    >
+      <Share2 color="white" size={14} />
       Share
     </Button>
   );
