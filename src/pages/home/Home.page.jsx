@@ -1,4 +1,5 @@
 import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,9 @@ export default function HomePage() {
             blanditiis aliquam numquam facere eveniet aut porro sapiente id quas
             deleniti
           </p>
-          <Button className=" mt-[40px] ">Start Now</Button>
+          <Link to={"/login"}>
+            <Button className=" mt-[40px] ">Start Now</Button>
+          </Link>
         </div>
       </section>
     </main>
