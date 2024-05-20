@@ -3,12 +3,14 @@ import { useParams } from "react-router";
 import { Loading } from "../../components";
 import { apiHooks } from "../../redux/createApis";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
 
 export default function NestMemoDetailPage() {
   const shareUrl = window.location.href;
   const { nestMemoId } = useParams();
   const { useGetMemoDetailQuery } = apiHooks;
-  const { data, isLoading } = useGetMemoDetailQuery(nestMemoId);
+  const { data, isLoading, isError } = useGetMemoDetailQuery(nestMemoId);
   return (
     <section>
       <div className="container mx-auto pt-5">
@@ -42,6 +44,18 @@ export default function NestMemoDetailPage() {
           </>
         )}
       </div>
+      {isError && (
+        <div className=" w-full h-screen grid place-items-center">
+          <div className=" text-center">
+            <p className=" font-medium">Sorry Data Not Found !</p>
+            <Link to={"/"}>
+              <Button size="sm" className=" mt-3">
+                Home
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
