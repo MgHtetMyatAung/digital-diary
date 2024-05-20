@@ -9,22 +9,28 @@ import { useState } from "react";
 import { apiHooks } from "../../redux/createApis";
 import { useEffect } from "react";
 
-export default function EditorPopup({ type, status, setOpen, label }) {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+export default function EditorPopup({ type, status, setOpen, label, item }) {
   const [check, setCheck] = useState("");
 
-  const { useCreateMemoMutation } = apiHooks;
+  const { useCreateMemoMutation, useUpdateMemoMutation } = apiHooks;
   const [createMemo, { isLoading, isSuccess }] = useCreateMemoMutation();
+  const [
+    updateMemo,
+    { isLoading: updateMemoLoading, isSuccess: updateMemoSuccess },
+  ] = useUpdateMemoMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const title = formData.get("title");
+    const description = formData.get("description");
 
     if (type === "memo") {
       if (status === "create") {
-        await createMemo({ title, description: desc });
+        await createMemo({ title, description });
       } else if (status === "edit") {
-        await createMemo({ title, description: desc });
+        const data = { title, description };
+        await updateMemo({ data, id: item.id });
       }
     } else if (type === "poem") {
       if (status === "create") {
@@ -42,10 +48,10 @@ export default function EditorPopup({ type, status, setOpen, label }) {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess || updateMemoSuccess) {
       changeValue(false, setOpen);
     }
-  }, [isSuccess, setOpen]);
+  }, [isSuccess, updateMemoSuccess, setOpen]);
 
   return (
     <section className=" fixed top-0 left-0 bottom-0 w-full h-screen bg-[#33333382] grid place-items-center z-20">
@@ -63,22 +69,22 @@ export default function EditorPopup({ type, status, setOpen, label }) {
           <CardBody className=" space-y-3">
             <Input
               label="Title"
-              defaultValue={status === "edit" ? title : ""}
-              onChange={(e) => changeValue(e.target.value, setTitle)}
+              name="title"
+              defaultValue={status === "edit" ? item?.title : ""}
             />
             <Textarea
               label="Description"
+              name="description"
               rows={7}
-              defaultValue={status === "edit" ? desc : ""}
-              onChange={(e) => changeValue(e.target.value, setDesc)}
+              defaultValue={status === "edit" ? item?.description : ""}
             />
           </CardBody>
           <CardFooter className=" pt-0 flex items-center justify-end gap-3">
             <Button color="red" onClick={() => changeValue(false, setOpen)}>
               Close
             </Button>
-            <Button type="submit" loading={isLoading}>
-              Create
+            <Button type="submit" loading={isLoading || updateMemoLoading}>
+              {status === "edit" ? "Update" : "Create"}
             </Button>
           </CardFooter>
         </Card>

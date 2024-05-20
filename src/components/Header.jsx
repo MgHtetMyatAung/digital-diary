@@ -7,6 +7,7 @@ import cns from "classnames";
 import useAuth from "../hook/useAuth";
 import { useDispatch } from "react-redux";
 import { removeAuth } from "../redux/authSlice";
+import { useEffect } from "react";
 
 const navLinks = [
   {
@@ -25,7 +26,7 @@ const navLinks = [
 
 export default function Header() {
   return (
-    <header className=" border-b fixed top-0 left-0 w-full bg-white z-10">
+    <header className=" shadow sticky top-0 left-0 w-full bg-white z-10">
       <nav className=" container mx-auto h-[70px] flex justify-between items-center">
         <div>
           <Link to={"/"} className=" text-2xl font-bold">
@@ -55,6 +56,14 @@ function MbMenu() {
   function menuToggle() {
     setMenuOpen(!menuOpen);
   }
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add("open-menu");
+    } else {
+      document.body.classList.remove("open-menu");
+    }
+  }, [menuOpen]);
   return (
     <>
       <Menu size={28} onClick={menuToggle} />

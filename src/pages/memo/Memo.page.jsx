@@ -8,16 +8,23 @@ import {
   Pagination,
   SearchForm,
 } from "../../components";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function MemoPage() {
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
   const [perPage, setPerPage] = useState(5);
   const [search, setSearch] = useState("");
   const { useGetMemosQuery } = apiHooks;
   const { data, isFetching } = useGetMemosQuery({ page, perPage, search });
 
+  useEffect(() => {
+    setSearchParams({ page: String(page) });
+  }, [page, setSearchParams]);
+
   return (
-    <main className=" min-h-[100vh] pt-[70px]">
+    <main className=" min-h-[100vh]">
       <div className=" container mx-auto my-5 space-y-2">
         <SearchForm setValue={setSearch} />
         <CreateMemoBtn />
@@ -41,6 +48,9 @@ export default function MemoPage() {
                   prev={data?.prevPage}
                   curPage={data?.curPage}
                   setPage={setPage}
+                  setParams={setSearchParams}
+                  paramName={"page"}
+                  totalPage={data?.pageTotal}
                 />
               </div>
             ) : (

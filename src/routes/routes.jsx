@@ -1,6 +1,7 @@
 import {
   HomePage,
   LoginPage,
+  MemoDetailPage,
   MemoPage,
   PoemPage,
   RegisterPage,
@@ -24,6 +25,15 @@ export const routes = [
     element: (
       <LayoutProvider>
         <MemoPage />
+      </LayoutProvider>
+    ),
+    access: "user",
+  },
+  {
+    path: "/memos/:memoId",
+    element: (
+      <LayoutProvider>
+        <MemoDetailPage />
       </LayoutProvider>
     ),
     access: "user",

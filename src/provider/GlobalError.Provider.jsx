@@ -22,7 +22,7 @@ export default function GlobalErrorProvider({ children }) {
     <>
       {children}
       {error?.code === 401 ? (
-        <section className=" fixed top-0 left-0 bottom-0 w-full h-screen bg-[#33333382] grid place-items-center">
+        <section className=" fixed top-0 left-0 bottom-0 w-full h-screen bg-[#33333382] grid place-items-center z-10">
           <Card className=" min-w-[250px]">
             <CardBody>
               <Typography color="red" className=" text-center">

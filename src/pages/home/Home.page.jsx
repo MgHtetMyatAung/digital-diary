@@ -3,7 +3,7 @@ import { Button } from "@material-tailwind/react";
 export default function HomePage() {
   return (
     <main className=" ">
-      <section className=" container mx-auto min-h-[100vh] flex items-center">
+      <section className=" container mx-auto min-h-[85vh] flex items-center">
         <div>
           <h2 className=" text-[36px] text-gray-800 md:text-[64px] font-bold">
             Digital Diary
