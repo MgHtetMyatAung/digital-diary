@@ -8,6 +8,7 @@ import useAuth from "../hook/useAuth";
 import { useDispatch } from "react-redux";
 import { removeAuth } from "../redux/authSlice";
 import { useEffect } from "react";
+import { X } from "lucide-react";
 
 const navLinks = [
   {
@@ -69,14 +70,17 @@ function MbMenu() {
       <Menu size={28} onClick={menuToggle} />
       <div
         className={cns(
-          "h-[calc(100vh-70px)] fixed bottom-0 w-full bg-gray-100 transition-all duration-300",
+          "h-screen fixed bottom-0 w-full bg-gray-100 transition-all duration-300",
           {
             "right-0": menuOpen,
             "right-[-100%]": !menuOpen,
           }
         )}
       >
-        <div className=" flex flex-col container mx-auto py-[30px] space-y-[20px]">
+        <div className=" flex flex-col container mx-auto py-[40px] space-y-[20px]">
+          <button className=" absolute top-5 right-5" onClick={menuToggle}>
+            <X />
+          </button>
           {navLinks.map(({ label, link }, id) => (
             <NavLink key={id} to={link} onClick={menuToggle}>
               {label}
