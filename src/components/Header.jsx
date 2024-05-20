@@ -15,14 +15,14 @@ const navLinks = [
     label: "Memos",
     link: "/memos",
   },
-  {
-    label: "Poems",
-    link: "/poems",
-  },
-  {
-    label: "Todos",
-    link: "/todos",
-  },
+  // {
+  //   label: "Poems",
+  //   link: "/poems",
+  // },
+  // {
+  //   label: "Todos",
+  //   link: "/todos",
+  // },
 ];
 
 export default function Header() {
