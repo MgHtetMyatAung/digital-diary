@@ -18,10 +18,10 @@ export default function MemoCard({ memo }) {
           <Typography variant="h5" className=" mb-2 leading-[30px]">
             {memo.title}
           </Typography>
+          <Typography className=" font-normal">
+            {stringSplit(memo.description, 100)}
+          </Typography>
         </Link>
-        <Typography className=" font-normal">
-          {stringSplit(memo.description, 100)}
-        </Typography>
       </CardBody>
       <CardFooter className=" pt-0 mt-auto">
         <div className=" flex items-center justify-between">
