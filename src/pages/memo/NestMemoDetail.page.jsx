@@ -11,17 +11,21 @@ export default function NestMemoDetailPage() {
   const { data, isLoading } = useGetMemoDetailQuery(nestMemoId);
   return (
     <section>
-      <Helmet>
-        <meta property="og:title" content={data?.data.title} />
-        <meta property="og:description" content={data?.data.description} />
-        <meta property="og:url" content={shareUrl} />
-        <meta property="og:type" content="website" />
-      </Helmet>
       <div className="container mx-auto pt-5">
         {isLoading ? (
           <Loading />
         ) : (
           <>
+            <Helmet>
+              <title>{data?.data.title}</title>
+              <meta property="og:title" content={data?.data.title} />
+              <meta
+                property="og:description"
+                content={data?.data.description}
+              />
+              <meta property="og:url" content={shareUrl} />
+              <meta property="og:type" content="website" />
+            </Helmet>
             {data?.data ? (
               <div className=" py-6">
                 <Typography variant="h5" className=" leading-[30px]">
