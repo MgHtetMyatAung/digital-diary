@@ -1,21 +1,15 @@
 import { Typography } from "@material-tailwind/react";
 import { useParams } from "react-router";
-import { apiHooks } from "../../redux/createApis";
 import { Loading } from "../../components";
-import BackButton from "../../components/actions/BackButton";
-import ShareButton from "../../components/actions/ShareButton";
+import { apiHooks } from "../../redux/createApis";
 
-export default function MemoDetailPage() {
-  const param = useParams();
+export default function NestMemoDetailPage() {
+  const { nestMemoId } = useParams();
   const { useGetMemoDetailQuery } = apiHooks;
-  const { data, isLoading } = useGetMemoDetailQuery(param.memoId);
+  const { data, isLoading } = useGetMemoDetailQuery(nestMemoId);
   return (
     <section>
       <div className="container mx-auto pt-5">
-        <div className=" flex items-center justify-between">
-          <BackButton label={"Back"} to={-1} />
-          <ShareButton itemId={param.memoId} />
-        </div>
         {isLoading ? (
           <Loading />
         ) : (

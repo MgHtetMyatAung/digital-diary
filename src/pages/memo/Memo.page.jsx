@@ -26,7 +26,7 @@ export default function MemoPage() {
   return (
     <main className=" min-h-[100vh]">
       <div className=" container mx-auto my-5 space-y-2">
-        <SearchForm setValue={setSearch} />
+        <SearchForm setValue={setSearch} setPage={setPage} />
         <CreateMemoBtn />
       </div>
       {isFetching ? (

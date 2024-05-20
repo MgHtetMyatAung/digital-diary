@@ -23,7 +23,7 @@ export default function MemoCard({ memo }) {
           {stringSplit(memo.description, 100)}
         </Typography>
       </CardBody>
-      <CardFooter className=" pt-0">
+      <CardFooter className=" pt-0 mt-auto">
         <div className=" flex items-center justify-between">
           <span className=" text-gray-600">{dateFormat(memo.created_at)}</span>
           <div className=" flex items-center gap-3">

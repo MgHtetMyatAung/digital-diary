@@ -3,6 +3,7 @@ import {
   LoginPage,
   MemoDetailPage,
   MemoPage,
+  NestMemoDetailPage,
   PoemPage,
   RegisterPage,
   TodoPage,
@@ -37,6 +38,11 @@ export const routes = [
       </LayoutProvider>
     ),
     access: "user",
+  },
+  {
+    path: "/memos/:memoId/:nestMemoId",
+    element: <NestMemoDetailPage />,
+    access: "any",
   },
   {
     path: "/poems",
