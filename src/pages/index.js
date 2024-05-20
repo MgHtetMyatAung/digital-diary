@@ -6,3 +6,4 @@ export { default as PoemPage } from "./poem/Poem.page";
 export { default as TodoPage } from "./todo/Todo.page";
 export { default as LoginPage } from "./auth/Login.page";
 export { default as RegisterPage } from "./auth/Register.page";
+export { default as PageNotFound } from "./notFound/NotFound.page";

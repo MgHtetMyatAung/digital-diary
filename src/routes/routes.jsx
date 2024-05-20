@@ -4,6 +4,7 @@ import {
   MemoDetailPage,
   MemoPage,
   NestMemoDetailPage,
+  PageNotFound,
   PoemPage,
   RegisterPage,
   TodoPage,
@@ -79,6 +80,11 @@ export const routes = [
         <RegisterPage />
       </UserProtectProvider>
     ),
+    access: "any",
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
     access: "any",
   },
 ];
