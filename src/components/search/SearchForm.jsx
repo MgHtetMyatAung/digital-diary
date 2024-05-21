@@ -1,6 +1,6 @@
 import { Input } from "@material-tailwind/react";
 
-export default function SearchForm({ setValue, setPage }) {
+export default function SearchForm({ setValue, setPage, placeholder }) {
   const handleSearch = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -9,7 +9,7 @@ export default function SearchForm({ setValue, setPage }) {
   };
   return (
     <form action="" onSubmit={handleSearch}>
-      <Input type="text" name="search" label="Search memos" />
+      <Input type="text" name="search" label={placeholder} />
     </form>
   );
 }

@@ -4,17 +4,36 @@ import { Card, CardBody } from "@material-tailwind/react";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { apiHooks } from "../../redux/createApis";
-import { useEffect } from "react";
 
 export default function ConfirmPopup({ itemId, type, label }) {
   const [openComfirmBox, setOpenComfirmBox] = useState(false);
-  const { useDeleteMemoMutation } = apiHooks;
-  const [deleteMemo, { isLoading, isSuccess }] = useDeleteMemoMutation();
+  const { useDeleteMemoMutation, useDeletePoemMutation } = apiHooks;
+
+  // for memo api
+  const [
+    deleteMemo,
+    { isLoading: isMemoDeleteLoading, isSuccess: isMemoDeleteSuccess },
+  ] = useDeleteMemoMutation();
+
+  // for poem api
+  const [
+    deletePoem,
+    { isLoading: isPoemDeleteLoading, isSuccess: isPoemDeleteSuccess },
+  ] = useDeletePoemMutation();
+
+  // for all loading
+  const isLoading = isMemoDeleteLoading || isPoemDeleteLoading;
+
+  // for all success
+  const isSuccess = isMemoDeleteSuccess || isPoemDeleteSuccess;
+
+  // for form handling
   const handleDelete = async (e) => {
     e.preventDefault();
     if (type === "memo") {
       await deleteMemo(itemId);
     } else if (type === "poem") {
+      await deletePoem(itemId);
     } else if (type === "todo") {
     }
 

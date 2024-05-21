@@ -4,7 +4,9 @@ import {
   MemoDetailPage,
   MemoPage,
   NestMemoDetailPage,
+  NestPoemDetailPage,
   PageNotFound,
+  PoemDetailPage,
   PoemPage,
   RegisterPage,
   TodoPage,
@@ -53,6 +55,20 @@ export const routes = [
       </LayoutProvider>
     ),
     access: "user",
+  },
+  {
+    path: "/poems/:poemId",
+    element: (
+      <LayoutProvider>
+        <PoemDetailPage />
+      </LayoutProvider>
+    ),
+    access: "user",
+  },
+  {
+    path: "/poems/:poemId/:nestPoemId",
+    element: <NestPoemDetailPage />,
+    access: "any",
   },
   {
     path: "/todos",

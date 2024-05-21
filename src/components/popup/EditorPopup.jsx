@@ -12,12 +12,39 @@ import { useEffect } from "react";
 export default function EditorPopup({ type, status, setOpen, label, item }) {
   const [check, setCheck] = useState("");
 
-  const { useCreateMemoMutation, useUpdateMemoMutation } = apiHooks;
+  const {
+    useCreateMemoMutation,
+    useUpdateMemoMutation,
+    useCreatePoemMutation,
+    useUpdatePoemMutation,
+  } = apiHooks;
+
+  // for memo api
   const [createMemo, { isLoading, isSuccess }] = useCreateMemoMutation();
+
   const [
     updateMemo,
     { isLoading: updateMemoLoading, isSuccess: updateMemoSuccess },
   ] = useUpdateMemoMutation();
+
+  // for poem api
+  const [
+    createPoem,
+    { isLoading: createPoemLoading, isSuccess: createPoemSuccess },
+  ] = useCreatePoemMutation();
+
+  const [
+    updatePoem,
+    { isLoading: updatePoemLoading, isSuccess: updatePoemSuccess },
+  ] = useUpdatePoemMutation();
+
+  // for all  loading
+  const isDataLoading =
+    isLoading || createPoemLoading || updateMemoLoading || updatePoemLoading;
+
+  // for all dataSuccess
+  const isDataSuccess =
+    isSuccess || updateMemoSuccess || createPoemSuccess || updatePoemSuccess;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +61,10 @@ export default function EditorPopup({ type, status, setOpen, label, item }) {
       }
     } else if (type === "poem") {
       if (status === "create") {
+        await createPoem({ title, description });
       } else if (status === "edit") {
+        const data = { title, description };
+        await updatePoem({ data, id: item.id });
       }
     } else if (type === "todo") {
       if (status === "create") {
@@ -48,10 +78,10 @@ export default function EditorPopup({ type, status, setOpen, label, item }) {
   };
 
   useEffect(() => {
-    if (isSuccess || updateMemoSuccess) {
+    if (isDataSuccess) {
       changeValue(false, setOpen);
     }
-  }, [isSuccess, updateMemoSuccess, setOpen]);
+  }, [isDataSuccess, setOpen]);
 
   return (
     <section className=" fixed top-0 left-0 bottom-0 w-full h-screen bg-[#33333382] grid place-items-center z-20">
@@ -83,7 +113,7 @@ export default function EditorPopup({ type, status, setOpen, label, item }) {
             <Button color="red" onClick={() => changeValue(false, setOpen)}>
               Close
             </Button>
-            <Button type="submit" loading={isLoading || updateMemoLoading}>
+            <Button type="submit" loading={isDataLoading}>
               {status === "edit" ? "Update" : "Create"}
             </Button>
           </CardFooter>
