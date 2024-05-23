@@ -6,7 +6,6 @@
 
 * {
   font-size: 16px;
-  color: #333;
   font-family: "Poppins", sans-serif;
 }
 
@@ -20,4 +19,10 @@ body.open-menu {
 
 p {
   @apply text-[15px] leading-[23px] md:text-base md:leading-[25px];
+}
+
+p,
+h5,
+a {
+  color: #333;
 }

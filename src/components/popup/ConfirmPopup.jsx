@@ -7,7 +7,11 @@ import { apiHooks } from "../../redux/createApis";
 
 export default function ConfirmPopup({ itemId, type, label }) {
   const [openComfirmBox, setOpenComfirmBox] = useState(false);
-  const { useDeleteMemoMutation, useDeletePoemMutation } = apiHooks;
+  const {
+    useDeleteMemoMutation,
+    useDeletePoemMutation,
+    useDeleteTodoMutation,
+  } = apiHooks;
 
   // for memo api
   const [
@@ -21,11 +25,19 @@ export default function ConfirmPopup({ itemId, type, label }) {
     { isLoading: isPoemDeleteLoading, isSuccess: isPoemDeleteSuccess },
   ] = useDeletePoemMutation();
 
+  // for todo api
+  const [
+    deleteTodo,
+    { isLoading: isTodoDeleteLoading, isSuccess: isTodoDeleteSuccess },
+  ] = useDeleteTodoMutation();
+
   // for all loading
-  const isLoading = isMemoDeleteLoading || isPoemDeleteLoading;
+  const isLoading =
+    isMemoDeleteLoading || isPoemDeleteLoading || isTodoDeleteLoading;
 
   // for all success
-  const isSuccess = isMemoDeleteSuccess || isPoemDeleteSuccess;
+  const isSuccess =
+    isMemoDeleteSuccess || isPoemDeleteSuccess || isTodoDeleteSuccess;
 
   // for form handling
   const handleDelete = async (e) => {
@@ -35,6 +47,7 @@ export default function ConfirmPopup({ itemId, type, label }) {
     } else if (type === "poem") {
       await deletePoem(itemId);
     } else if (type === "todo") {
+      await deleteTodo(itemId);
     }
 
     if (isSuccess) {

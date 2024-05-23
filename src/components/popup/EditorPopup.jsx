@@ -5,18 +5,17 @@ import { Typography } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
 import { Card, CardBody } from "@material-tailwind/react";
-import { useState } from "react";
 import { apiHooks } from "../../redux/createApis";
 import { useEffect } from "react";
 
 export default function EditorPopup({ type, status, setOpen, label, item }) {
-  const [check, setCheck] = useState("");
-
   const {
     useCreateMemoMutation,
     useUpdateMemoMutation,
     useCreatePoemMutation,
     useUpdatePoemMutation,
+    useCreateTodoMutation,
+    useUpdateTodoMutation,
   } = apiHooks;
 
   // for memo api
@@ -38,13 +37,32 @@ export default function EditorPopup({ type, status, setOpen, label, item }) {
     { isLoading: updatePoemLoading, isSuccess: updatePoemSuccess },
   ] = useUpdatePoemMutation();
 
+  // for todo api
+  const [createTodo, { isLoading: todoLoading, isSuccess: isTodoSuccess }] =
+    useCreateTodoMutation();
+
+  const [
+    updateTodo,
+    { isLoading: updateTodoLoading, isSuccess: updateTodoSuccess },
+  ] = useUpdateTodoMutation();
+
   // for all  loading
   const isDataLoading =
-    isLoading || createPoemLoading || updateMemoLoading || updatePoemLoading;
+    isLoading ||
+    createPoemLoading ||
+    updateMemoLoading ||
+    updatePoemLoading ||
+    todoLoading ||
+    updateTodoLoading;
 
   // for all dataSuccess
   const isDataSuccess =
-    isSuccess || updateMemoSuccess || createPoemSuccess || updatePoemSuccess;
+    isSuccess ||
+    updateMemoSuccess ||
+    createPoemSuccess ||
+    updatePoemSuccess ||
+    isTodoSuccess ||
+    updateTodoSuccess;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,7 +86,10 @@ export default function EditorPopup({ type, status, setOpen, label, item }) {
       }
     } else if (type === "todo") {
       if (status === "create") {
+        await createTodo({ title });
       } else if (status === "edit") {
+        const data = { title, done: item.done };
+        await updateTodo({ data, id: item.id });
       }
     }
   };
@@ -102,12 +123,14 @@ export default function EditorPopup({ type, status, setOpen, label, item }) {
               name="title"
               defaultValue={status === "edit" ? item?.title : ""}
             />
-            <Textarea
-              label="Description"
-              name="description"
-              rows={7}
-              defaultValue={status === "edit" ? item?.description : ""}
-            />
+            {type !== "todo" ? (
+              <Textarea
+                label="Description"
+                name="description"
+                rows={7}
+                defaultValue={status === "edit" ? item?.description : ""}
+              />
+            ) : null}
           </CardBody>
           <CardFooter className=" pt-0 flex items-center justify-end gap-3">
             <Button color="red" onClick={() => changeValue(false, setOpen)}>
