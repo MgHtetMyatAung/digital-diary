@@ -21,7 +21,7 @@ import { addErrorInfo, removeErrorInfo } from "./errorSlice";
 
 // Define an array of API service objects
 const services = apiServices;
-console.log(services, "services");
+// console.log(services, "services");
 
 // Initialize an empty object to store reducers
 const reducers = { auth: authReducer, error: errorReducer };
@@ -33,7 +33,7 @@ Object.entries(services).forEach(([key]) => {
   middlewares.push(services[key]);
 });
 
-console.log(middlewares, "middlewares");
+// console.log(middlewares, "middlewares");
 
 const rootReducers = combineReducers(reducers);
 
