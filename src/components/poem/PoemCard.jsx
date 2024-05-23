@@ -15,10 +15,10 @@ export default function PoemCard({ poem }) {
     <Card>
       <CardBody>
         <Link to={`/poems/${poem?.id}`}>
-          <Typography variant="h5" className=" mb-2 leading-[30px]">
+          <Typography variant="h5" className=" mb-2 leading-[30px] font-popin">
             {poem.title}
           </Typography>
-          <Typography className=" font-normal">
+          <Typography className=" font-normal font-popin">
             {stringSplit(poem.description, 100)}
           </Typography>
         </Link>

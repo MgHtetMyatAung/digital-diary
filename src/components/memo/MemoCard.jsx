@@ -15,10 +15,10 @@ export default function MemoCard({ memo }) {
     <Card>
       <CardBody>
         <Link to={`/memos/${memo?.id}`}>
-          <Typography variant="h5" className=" mb-2 leading-[30px]">
+          <Typography variant="h5" className=" mb-2 leading-[30px] font-popin">
             {memo.title}
           </Typography>
-          <Typography className=" font-normal">
+          <Typography className=" font-normal font-popin">
             {stringSplit(memo.description, 100)}
           </Typography>
         </Link>

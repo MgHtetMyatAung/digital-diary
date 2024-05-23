@@ -14,6 +14,9 @@ module.exports = withMT({
         "2xl": "6rem",
       },
     },
+    fontFamily: {
+      popin: ["Poppins"],
+    },
   },
   plugins: [],
 });

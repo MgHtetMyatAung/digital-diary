@@ -22,7 +22,7 @@ export default function MemoDetailPage() {
           <>
             {data?.data ? (
               <div className=" py-6">
-                <Typography variant="h5" className=" leading-[30px]">
+                <Typography variant="h5" className=" leading-[30px] font-popin">
                   {data?.data.title}
                 </Typography>
                 <p
