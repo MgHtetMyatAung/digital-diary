@@ -19,5 +19,5 @@ body.open-menu {
 }
 
 p {
-  line-height: 24px;
+  @apply text-sm md:text-base;
 }
