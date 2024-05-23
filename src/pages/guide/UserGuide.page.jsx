@@ -106,7 +106,7 @@ export default function UserGuidePage() {
               <Typography variant="h6" className=" font-popin">
                 Managing Memos
               </Typography>
-              <ol className=" list-decimal pl-4 mt-2 space-y-1">
+              <ol className=" list-decimal pl-6 mt-2 space-y-1">
                 <li>
                   <Typography className=" font-popin font-normal">
                     Create Memo
@@ -138,7 +138,7 @@ export default function UserGuidePage() {
               <Typography variant="h6" className=" font-popin">
                 Managing Poems
               </Typography>
-              <ol className=" list-decimal pl-4 mt-2 space-y-1">
+              <ol className=" list-decimal pl-6 mt-2 space-y-1">
                 <li>
                   <Typography className=" font-popin font-normal">
                     Create Poem
@@ -170,7 +170,7 @@ export default function UserGuidePage() {
               <Typography variant="h6" className=" font-popin">
                 Managing Todos
               </Typography>
-              <ol className=" list-decimal pl-4 mt-2 space-y-1">
+              <ol className=" list-decimal pl-6 mt-2 space-y-1">
                 <li>
                   <Typography className=" font-popin font-normal">
                     Create Todo
