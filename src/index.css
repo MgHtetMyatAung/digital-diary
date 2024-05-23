@@ -19,5 +19,5 @@ body.open-menu {
 }
 
 p {
-  @apply text-[15px] leading-[22px] md:text-base md:leading-6;
+  @apply text-[15px] leading-[23px] md:text-base md:leading-[25px];
 }
