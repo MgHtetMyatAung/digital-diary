@@ -18,9 +18,16 @@ export default function HomePage() {
             beautifully chronicled in your personalized digital diary. Start
             documenting your life today with Digital Diary.
           </p>
-          <Link to={currentUser?.id ? "/memos" : "/login"}>
-            <Button className=" mt-[40px] ">Start Now</Button>
-          </Link>
+          <div className=" flex items-center gap-4">
+            <Link to={currentUser?.id ? "/memos" : "/login"}>
+              <Button className=" mt-[40px] ">Start Now</Button>
+            </Link>
+            <Link to={"/user-guide"}>
+              <Button className=" mt-[40px]" variant="outlined">
+                user guide
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </main>

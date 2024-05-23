@@ -10,6 +10,7 @@ import {
   PoemPage,
   RegisterPage,
   TodoPage,
+  UserGuidePage,
 } from "../pages";
 import LayoutProvider from "../provider/Layout.Provider";
 import UserProtectProvider from "../provider/User.Provider";
@@ -95,6 +96,15 @@ export const routes = [
       <UserProtectProvider>
         <RegisterPage />
       </UserProtectProvider>
+    ),
+    access: "any",
+  },
+  {
+    path: "/user-guide",
+    element: (
+      <LayoutProvider>
+        <UserGuidePage />
+      </LayoutProvider>
     ),
     access: "any",
   },
