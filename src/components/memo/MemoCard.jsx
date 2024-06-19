@@ -18,7 +18,7 @@ export default function MemoCard({ memo }) {
           <Typography variant="h5" className=" mb-2 leading-[30px] font-popin">
             {memo.title}
           </Typography>
-          <Typography className=" font-normal font-popin">
+          <Typography className=" font-normal font-popin break-words">
             {stringSplit(memo.description, 100)}
           </Typography>
         </Link>
